@@ -1,15 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics;
 
-namespace RuntimeScripting.src
+namespace RuntimeScripting
 {
-    public interface ScriptingLanguage
+    public abstract class ScriptingLanguage
     {
-        public void Compile(string code);
+        public abstract void CompileCode(string code);
 
-        public void Run();
+        public abstract string ExecuteCode();
+
+        public string Compile(string code)
+        {
+            try
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                CompileCode(code);
+
+                stopwatch.Stop();
+
+                return $"Completed compile in {stopwatch.Elapsed.TotalMilliseconds} ms";
+            }
+            catch(Exception exception)
+            {
+                return exception.ToString();
+            }
+        }
+
+        public string Run()
+        {
+            try
+            {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+                string resultMessage = ExecuteCode();
+                stopwatch.Stop();
+
+                return resultMessage + Environment.NewLine + $"Completed run in {stopwatch.Elapsed.TotalMilliseconds} ms";
+            }
+            catch (Exception exception)
+            {
+                return exception.ToString();
+            }
+        }
     }
 }

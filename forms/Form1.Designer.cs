@@ -104,6 +104,7 @@
             CSharpCompile.TabIndex = 6;
             CSharpCompile.Text = "Compile";
             CSharpCompile.UseVisualStyleBackColor = true;
+            CSharpCompile.Click += CSharpCompile_Click;
             // 
             // LuaCompile
             // 
@@ -113,6 +114,7 @@
             LuaCompile.TabIndex = 7;
             LuaCompile.Text = "Compile";
             LuaCompile.UseVisualStyleBackColor = true;
+            LuaCompile.Click += LuaCompile_Click;
             // 
             // PythonCompile
             // 
@@ -122,6 +124,7 @@
             PythonCompile.TabIndex = 8;
             PythonCompile.Text = "Compile";
             PythonCompile.UseVisualStyleBackColor = true;
+            PythonCompile.Click += PythonCompile_Click;
             // 
             // CSharpRun
             // 
@@ -131,6 +134,7 @@
             CSharpRun.TabIndex = 9;
             CSharpRun.Text = "Run";
             CSharpRun.UseVisualStyleBackColor = true;
+            CSharpRun.Click += CSharpRun_Click;
             // 
             // LuaRun
             // 
@@ -140,6 +144,7 @@
             LuaRun.TabIndex = 10;
             LuaRun.Text = "Run";
             LuaRun.UseVisualStyleBackColor = true;
+            LuaRun.Click += LuaRun_Click;
             // 
             // PythonRun
             // 
@@ -149,6 +154,7 @@
             PythonRun.TabIndex = 11;
             PythonRun.Text = "Run";
             PythonRun.UseVisualStyleBackColor = true;
+            PythonRun.Click += PythonRun_Click;
             // 
             // PythonConsole
             // 

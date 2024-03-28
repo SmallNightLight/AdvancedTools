@@ -8,4 +8,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="IronPython" Version="3.4.1" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Scripting" Version="4.9.2" />
+    <PackageReference Include="NLua" Version="1.7.2" />
+  </ItemGroup>
+
 </Project>

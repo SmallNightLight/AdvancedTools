@@ -1,11 +1,12 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace RuntimeScripting
 {
     public abstract class ScriptingLanguage
     {
-        public abstract void CompileCode(string code);
+        protected bool _isCompiled;
+
+        public abstract bool CompileCode(string code, out string message);
 
         public abstract string ExecuteCode();
 
@@ -16,20 +17,27 @@ namespace RuntimeScripting
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
 
-                CompileCode(code);
+                _isCompiled = CompileCode(code, out string message);
 
                 stopwatch.Stop();
 
-                return $"Completed compile in {stopwatch.Elapsed.TotalMilliseconds} ms";
+                if (_isCompiled)
+                    return $"Completed compile in {stopwatch.Elapsed.TotalMilliseconds} ms";
+
+                return "Failed to compile code: " + Environment.NewLine + message;
             }
             catch(Exception exception)
             {
+                _isCompiled = false;
                 return exception.ToString();
             }
         }
 
         public string Run()
         {
+            if (!_isCompiled)
+                return "Compile code first without errors";
+
             try
             {
                 Stopwatch stopwatch = new Stopwatch();

@@ -81,7 +81,7 @@ namespace RuntimeScripting
                 if (result == null) return "Result is null";
 
                 string resultMessage = result.ToString();
-                return "Results: " + resultMessage;
+                return "Result: " + resultMessage;
             }
             catch (Exception exception)
             {

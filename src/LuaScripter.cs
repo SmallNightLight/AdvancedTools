@@ -43,13 +43,11 @@ namespace RuntimeScripting
 
                 var results = luaFunction.Call();
 
-                string resultMessage = "";
-                foreach (var result in results)
-                {
-                    resultMessage += Environment.NewLine + result;
-                }
+                if (results == null) return "Result is null";
 
-                return "Results: " + resultMessage;
+                string resultMessage = results[0].ToString();
+
+                return "Result: " + resultMessage;
             }
             catch (Exception exception)
             {

@@ -21,9 +21,10 @@ namespace RuntimeScripting
                 _scope = engine.CreateScope();
                 _scope.SetVariable("result", null);
 
-
+                string[] lines = code.Split('\n');
+                string indentedCode = string.Join("\n    ", lines);
                 string totalCode = $@"def Run():
-    {code}
+    {indentedCode}
 
 result = Run()
 ";
@@ -53,7 +54,7 @@ result = Run()
             {
                 _compiledCode.Execute(_scope);
                 object targetVariableValue = _scope.GetVariable("result");
-                return $"Results: {targetVariableValue}";
+                return $"Result: {targetVariableValue}";
             }
             catch (Exception exception)
             {

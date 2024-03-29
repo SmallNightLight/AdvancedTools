@@ -4,6 +4,7 @@ namespace RuntimeScripting
     {
         private CSharpScripter? _cSharpScripter;
         private LuaScripter? _luaScripter;
+        private PythonScripter? _pythonScripter;
 
         public Form1()
         {
@@ -50,12 +51,21 @@ namespace RuntimeScripting
 
         private void PythonCompile_Click(object sender, EventArgs e)
         {
-
+            _pythonScripter = new PythonScripter();
+            string resultMessage = _pythonScripter.Compile(PythonCode.Text);
+            Log(PythonConsole, resultMessage);
         }
 
         private void PythonRun_Click(object sender, EventArgs e)
         {
+            if (_pythonScripter == null)
+            {
+                Log(PythonCode, "Lua code not compiled");
+                return;
+            }
 
+            string resultMessage = _pythonScripter.Run();
+            Log(PythonConsole, resultMessage);
         }
 
         private void Log(TextBox console, string message)

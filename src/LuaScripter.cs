@@ -19,7 +19,6 @@ namespace RuntimeScripting
 	");
                 message = "No errors";
                 return true;
-
             }
             catch (Exception e)
             {

@@ -43,6 +43,7 @@
             PythonConsole = new TextBox();
             LuaConsole = new TextBox();
             CSharpConsole = new TextBox();
+            TestAllButton = new Button();
             SuspendLayout();
             // 
             // LuaCode
@@ -180,11 +181,22 @@
             CSharpConsole.Size = new Size(200, 83);
             CSharpConsole.TabIndex = 14;
             // 
+            // TestAllButton
+            // 
+            TestAllButton.Location = new Point(1, 2);
+            TestAllButton.Name = "TestAllButton";
+            TestAllButton.Size = new Size(75, 23);
+            TestAllButton.TabIndex = 15;
+            TestAllButton.Text = "Test All";
+            TestAllButton.UseVisualStyleBackColor = true;
+            TestAllButton.Click += TestAllButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(TestAllButton);
             Controls.Add(CSharpConsole);
             Controls.Add(LuaConsole);
             Controls.Add(PythonConsole);
@@ -223,5 +235,6 @@
         private TextBox PythonConsole;
         private TextBox LuaConsole;
         private TextBox CSharpConsole;
+        private Button TestAllButton;
     }
 }

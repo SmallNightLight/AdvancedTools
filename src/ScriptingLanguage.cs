@@ -10,7 +10,7 @@ namespace RuntimeScripting
 
         public abstract string ExecuteCode();
 
-        public string Compile(string code)
+        public bool Compile(string code, out string resultMessage, out double time)
         {
             try
             {
@@ -20,36 +20,50 @@ namespace RuntimeScripting
                 _isCompiled = CompileCode(code, out string message);
 
                 stopwatch.Stop();
+                time = stopwatch.Elapsed.TotalMilliseconds;
 
                 if (_isCompiled)
-                    return $"Completed compile in {stopwatch.Elapsed.TotalMilliseconds} ms";
+                    resultMessage = $"Completed compile in {time} ms";
+                else
+                    resultMessage = "Failed to compile code: " + message;
 
-                return "Failed to compile code: " + Environment.NewLine + message;
+                return _isCompiled;
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 _isCompiled = false;
-                return exception.ToString();
+                time = 0.0;
+                resultMessage = exception.ToString();
+                return false;
             }
         }
 
-        public string Run()
+        public bool Run(out string resultMessage, out double time)
         {
             if (!_isCompiled)
-                return "Compile code first without errors";
-
+            {
+                resultMessage = "Compile code first without errors";
+                time = 0.0;
+                return false;
+            }
+            
             try
             {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
-                string resultMessage = ExecuteCode();
+                string result = ExecuteCode();
                 stopwatch.Stop();
 
-                return resultMessage + Environment.NewLine + $"Completed run in {stopwatch.Elapsed.TotalMilliseconds} ms";
+                time = stopwatch.Elapsed.TotalMilliseconds;
+                resultMessage = result + Environment.NewLine + $"Completed run in {time} ms";
+
+                return true;
             }
             catch (Exception exception)
             {
-                return exception.ToString();
+                time = 0.0;
+                resultMessage = exception.ToString();
+                return false;
             }
         }
     }
